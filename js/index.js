@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
     {
       q: 'How many kilometers deep is the center of the Earth?',
       o: ['2900km', '3654km', '3485km', '2500km'],
-      a: 1,
+      a: 0,
     },
   ];
 
@@ -97,6 +97,20 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     return score;
   };
+
+  //TASK 2
+const submission = () => {
+  calculateScore();
+  submitBtn.style.display ='none';
+  displayScore.innerHTML = `Your final score is: ${calculateScore()} / 5!`
+}
+
+const submitBtn = document.querySelector('#btnSubmit');
+const displayScore = document.querySelector('#score');
+
+  submitBtn.addEventListener('click', () => {
+    submission();
+  })
 
   // call the displayQuiz function
   displayQuiz();
