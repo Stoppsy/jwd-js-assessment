@@ -20,13 +20,34 @@
 *************************** */
 
 window.addEventListener('DOMContentLoaded', () => {
-  const start = document.querySelector('#start');
-  start.addEventListener('click', function (e) {
+  const btnStart = document.querySelector('#btnStart');
+  const start = document.querySelector('#start')
+  btnStart.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
-    //Part of Task 5
-    let time = setInterval(timer, 1000);
+    //TASK 5
+    let time;
+    time = setInterval(function timer() {
+      seconds--;
+      if (seconds < 60) {
+        document.getElementById("time").innerHTML = "0:" + seconds;
+      }
+      
+      if (seconds < 10) {
+        document.getElementById("time").innerHTML = "0:0" + seconds;
+      }
+      if (seconds === -1) {
+        clearInterval(time);
+        document.getElementById("time").innerHTML = "0:00";
+        alert("Ran out of time");
+        calculateScore();
+        btnSubmit.style.display ='none';
+        displayScore.innerHTML = `Your final score is: ${calculateScore()} / 5!`
+      }
+    }, 1000);
   });
+let seconds = 60;
+
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
@@ -126,21 +147,6 @@ btnReset.addEventListener('click', () =>{
   location.reload();
 });
 
-//TASK 5 - Timer
-let seconds = 60;
-function timer() {
-  
-  if (seconds < 60) {
-    document.getElementById("time").innerHTML = "0:" + seconds;
-  }
-  seconds--;
-  if (seconds === -1) {
-    clearInterval(time);
-    alert("Ran out of time");
-    window.location.reload();
-  }
-}
-
-  // call the displayQuiz function
-  displayQuiz();
+// call the displayQuiz function
+displayQuiz();
 });
