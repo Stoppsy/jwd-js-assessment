@@ -7,14 +7,14 @@
   The tasks you need to do are below.
 
     TASKS TODO:
-      1. Calculate the score as the total of the number of correct answers
+      1. Calculate the score as the total of the number of correct answers                              |/|\|-CHECK-|/|\|
 
-      2. Add an Event listener for the submit button, which will display the score and highlight 
-         the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.
+      2. Add an Event listener for the submit button, which will display the score and highlight        |/|\|-CHECK-|/|\|
+         the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.  |/|\|-CHECK-|/|\|
 
-      3. Add 2 more questions to the app (each question must have 4 options). |/|\|-CHECK-|/|\|
+      3. Add 2 more questions to the app (each question must have 4 options).                           |/|\|-CHECK-|/|\|
 
-      4. Reload the page when the reset button is clicked (hint: search window.location)
+      4. Reload the page when the reset button is clicked (hint: search window.location)                |/|\|-CHECK-|/|\|
 
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
           liElement.style.backgroundColor = 'green';
         }
 
-        if (radioElement.checked && quizItem.a ==i) {
+        if (radioElement.checked && quizItem.a === i) {
           // code for task 1 goes here
           score += 1;
         }
@@ -98,19 +98,30 @@ window.addEventListener('DOMContentLoaded', () => {
     return score;
   };
 
-  //TASK 2
+  //TASK 2 - Event Listener for score display
 const submission = () => {
   calculateScore();
-  submitBtn.style.display ='none';
-  displayScore.innerHTML = `Your final score is: ${calculateScore()} / 5!`
+  btnSubmit.style.display ='none';
+  
+  if (calculateScore(score) === 5) {
+    displayScore.innerHTML = `Wow! You got a perfect score of <strong>${calculateScore()} / 5!</strong> Congratulations!`
+  } else {
+    displayScore.innerHTML = `Your final score is: ${calculateScore()} / 5!`
+  }
 }
 
-const submitBtn = document.querySelector('#btnSubmit');
+const btnSubmit = document.querySelector('#btnSubmit');
 const displayScore = document.querySelector('#score');
 
-  submitBtn.addEventListener('click', () => {
+  btnSubmit.addEventListener('click', () => {
     submission();
-  })
+  });
+
+  //TASK 4 - Reset Page
+const btnReset = document.querySelector('#btnReset');
+btnReset.addEventListener('click', () =>{
+  location.reload();
+});
 
   // call the displayQuiz function
   displayQuiz();
