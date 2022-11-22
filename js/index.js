@@ -130,9 +130,7 @@ btnReset.addEventListener('click', () =>{
 let seconds = 60;
 function timer() {
   
-  if (seconds >= 60) {
-    document.getElementById("time").innerHTML = "1:00";
-  } else {
+  if (seconds < 60) {
     document.getElementById("time").innerHTML = "0:" + seconds;
   }
   seconds--;
