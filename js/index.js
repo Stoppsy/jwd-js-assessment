@@ -7,16 +7,16 @@
   The tasks you need to do are below.
 
     TASKS TODO:
-      1. Calculate the score as the total of the number of correct answers                              |/|\|-CHECK-|/|\|
+      1. Calculate the score as the total of the number of correct answers  --COMPLETED--
 
-      2. Add an Event listener for the submit button, which will display the score and highlight        |/|\|-CHECK-|/|\|
-         the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.  |/|\|-CHECK-|/|\|
+      2. Add an Event listener for the submit button, which will display the score and highlight  --COMPLETED--
+         the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.
 
-      3. Add 2 more questions to the app (each question must have 4 options).                           |/|\|-CHECK-|/|\|
+      3. Add 2 more questions to the app (each question must have 4 options). --COMPLETED--
 
-      4. Reload the page when the reset button is clicked (hint: search window.location)                |/|\|-CHECK-|/|\|
+      4. Reload the page when the reset button is clicked (hint: search window.location) --COMPLETED--
 
-      5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
+      5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers --COMPLETED--
 *************************** */
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -24,6 +24,8 @@ window.addEventListener('DOMContentLoaded', () => {
   start.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
+    //Part of Task 5
+    let time = setInterval(timer, 1000);
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -44,6 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    //TASK 3 - Add additional answers
     {
       q: 'What was the largest empire in the world?',
       o: ['Roman', 'Mongolian', 'British', 'Qing Dynasty'],
@@ -89,8 +92,8 @@ window.addEventListener('DOMContentLoaded', () => {
           liElement.style.backgroundColor = 'green';
         }
 
+        //TASK 1 = Calculate score
         if (radioElement.checked && quizItem.a === i) {
-          // code for task 1 goes here
           score += 1;
         }
       }
@@ -98,7 +101,7 @@ window.addEventListener('DOMContentLoaded', () => {
     return score;
   };
 
-  //TASK 2 - Event Listener for score display
+//TASK 2 - Event Listener for score display
 const submission = () => {
   calculateScore();
   btnSubmit.style.display ='none';
@@ -117,11 +120,28 @@ const displayScore = document.querySelector('#score');
     submission();
   });
 
-  //TASK 4 - Reset Page
+//TASK 4 - Reset Page
 const btnReset = document.querySelector('#btnReset');
 btnReset.addEventListener('click', () =>{
   location.reload();
 });
+
+//TASK 5 - Timer
+let seconds = 60;
+function timer() {
+  
+  if (seconds >= 60) {
+    document.getElementById("time").innerHTML = "1:00";
+  } else {
+    document.getElementById("time").innerHTML = "0:" + seconds;
+  }
+  seconds--;
+  if (seconds === -1) {
+    clearInterval(time);
+    alert("Ran out of time");
+    window.location.reload();
+  }
+}
 
   // call the displayQuiz function
   displayQuiz();
